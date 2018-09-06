@@ -32,11 +32,6 @@ doi: 10.1186/s13059-017-1269-0
 google_scholar_cluster_id: '15188907290164515017'
 trajectory_types:
 - linear
-- bifurcation
-- convergence
-- multifurcation
-- binary_tree
-- tree
 topology_inference: fixed
 license: MIT
 authors:
