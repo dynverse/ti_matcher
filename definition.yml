@@ -1,5 +1,6 @@
 id: matcher
 docker_repository: dynverse/ti_matcher
+singularity_collection: 1552
 container_url: https://github.com/dynverse/ti_matcher
 name: MATCHER
 type: algorithm
