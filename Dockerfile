@@ -1,8 +1,8 @@
 FROM dynverse/dynwrap:py3.6
 
-LABEL version 0.1.2
-
 RUN pip install pymatcher
+
+LABEL version 0.1.2
 
 ADD . /code
 
