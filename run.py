@@ -1,3 +1,8 @@
+#!/usr/local/bin/python
+
+import dynclipy
+task = dynclipy.main()
+
 import pandas as pd
 import numpy as np
 import json
@@ -10,10 +15,8 @@ checkpoints = {}
 
 #   ____________________________________________________________________________
 #   Load data                                                               ####
-expression = pd.read_csv("/ti/input/expression.csv", index_col=[0])
-params = json.load(open("/ti/input/params.json", "r"))
-
-checkpoints["method_afterpreproc"] = time.time()
+expression = task["expression"]
+params = task["params"]
 
 #   ____________________________________________________________________________
 #   Infer trajectory                                                        ####
@@ -24,16 +27,18 @@ checkpoints["method_aftermethod"] = time.time()
 
 #   ____________________________________________________________________________
 #   Save output                                                             ####
-cell_ids = pd.DataFrame({
-  "cell_ids": expression.index
-})
-cell_ids.to_csv("/ti/output/cell_ids.csv", index=False)
+dataset = dynclipy.wrap_data(cell_ids = expression.index)
 
+# pseudotime
 pseudotime = pd.DataFrame({
   "cell_id":expression.index,
   "pseudotime":m.master_time[0][:, 0]
 })
-pseudotime.to_csv("/ti/output/pseudotime.csv", index=False)
+
+dataset.add_linear_trajectory(pseudotime = pseudotime)
 
 # timings
-json.dump(checkpoints, open("/ti/output/timings.json", "w"))
+dataset.add_timings(checkpoints)
+
+# save
+dataset.write_output(task["output"])

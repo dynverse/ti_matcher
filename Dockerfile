@@ -1,9 +1,8 @@
-FROM dynverse/dynwrap:py3.6
+FROM dynverse/dynwrappy:v0.1.0
 
+RUN pip install git+https://github.com/SheffieldML/GPy.git
 RUN pip install pymatcher
 
-LABEL version 0.1.4
+COPY definition.yml run.py example.h5 /code/
 
-ADD . /code
-
-ENTRYPOINT python /code/run.py
+ENTRYPOINT ["/code/run.py"]
