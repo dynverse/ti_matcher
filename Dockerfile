@@ -5,6 +5,6 @@ ARG GITHUB_PAT
 RUN pip install git+https://github.com/SheffieldML/GPy.git
 RUN pip install pymatcher
 
-COPY definition.yml run.R example.sh /code/
+COPY definition.yml run.py example.sh /code/
 
 ENTRYPOINT ["/code/run.py"]
