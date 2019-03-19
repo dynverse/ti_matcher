@@ -16,12 +16,12 @@ checkpoints = {}
 #   ____________________________________________________________________________
 #   Load data                                                               ####
 expression = task["expression"]
-params = task["params"]
+parameters = task["parameters"]
 
 #   ____________________________________________________________________________
 #   Infer trajectory                                                        ####
 m = matcher.MATCHER([expression.values])
-m.infer(quantiles = params["quantiles"], method = params["method"])
+m.infer(quantiles = parameters["quantiles"], method = parameters["method"])
 
 checkpoints["method_aftermethod"] = time.time()
 
