@@ -1,47 +1,49 @@
-id: matcher
-docker_repository: dynverse/ti_matcher
-singularity_collection: 1552
-container_url: https://github.com/dynverse/ti_matcher
-name: MATCHER
-source: tool
-platform: Python
+method:
+  id: matcher
+  name: MATCHER
+  tool_id: matcher
+  source: tool
+  platform: Python
+  url: https://github.com/jw156605/MATCHER
+  license: MIT
+  authors:
+  - given: Joshua
+    family: Welch
+    email: jwelch@cs.unc.edu
+    github: jw156605
+  - given: Jan
+    family: Prins
+    email: prins@cs.unc.edu
+
+manuscript:
+  doi: 10.1186/s13059-017-1269-0
+  google_scholar_cluster_id: '15188907290164515017'
+  publication_date: '2017-06-24'
+
+container:
+  url: https://github.com/dynverse/ti_matcher
+  docker: dynverse/ti_matcher
+
+wrapper:
+  type: linear_trajectory
+  topology_inference: fixed
+  trajectory_types: linear
+  input_required: expression
+
 parameters:
-  quantiles:
+  - id: quantiles
     description: quantiles How many quantiles to use when computing warp functions
       (integer)
     type: integer
     default: 50
-    lower: 2
-    upper: 500
-  method:
+    distribution:
+      type: uniform
+      lower: 2
+      upper: 500
+  - id: method
     description: Gaussian process regression or linear interpolation? ("gp" or "linear)
-    type: discrete
+    type: character
     values:
     - gp
     - linear
     default: linear
-input:
-  format: text
-  required: expression
-output:
-  format: text
-  outputs:
-  - linear_trajectory
-  - timings
-wrapper_type: linear_trajectory
-doi: 10.1186/s13059-017-1269-0
-google_scholar_cluster_id: '15188907290164515017'
-trajectory_types:
-- linear
-topology_inference: fixed
-license: MIT
-authors:
-- given: Joshua
-  family: Welch
-  email: jwelch@cs.unc.edu
-  github: jw156605
-- given: Jan
-  family: Prins
-  email: prins@cs.unc.edu
-publication_date: '2017-06-24'
-code_url: https://github.com/jw156605/MATCHER
